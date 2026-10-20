@@ -1,0 +1,15 @@
+# VS Codeの個人設定
+/.vscode/
+
+# 環境変数・秘密情報
+.env
+.env.*
+!.env.example
+
+# Dockerのローカルデータ
+/docker/mysql/data/
+/docker/mariadb/data/
+
+# OSの一時ファイル
+.DS_Store
+Thumbs.db
