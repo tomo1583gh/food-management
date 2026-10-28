@@ -25,6 +25,7 @@ class UpdateFoodRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'category_id' => ['required', 'exists:categories,id'],
             'unit' => ['required', 'string', 'max:50'],
+            'min_qty' => ['required', 'numeric', 'min:0', 'decimal:0,2'],
         ];
     }
 
@@ -41,6 +42,21 @@ class UpdateFoodRequest extends FormRequest
             'unit.required' => '単位を入六してください。',
             'unit.string' => '単位は文字列で入力してください。',
             'unit.max' => '単位は50文字以内で入力してください。',
+
+            'min_qty.required' => '最低在庫数を入力してください。',
+            'min_qty.numeric' => '最低在庫数は数値で入力してください。',
+            'min_qty.min' => '最低在庫数は0以上で入力してください。',
+            'min_qty.decimal' => '最低在庫数は小数点以下2桁以内で入力してください。',
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'name' => '食材名',
+            'category_id' => 'カテゴリ',
+            'unit' => '単位',
+            'min_qty' => '最低在庫数',
         ];
     }
 }

@@ -1,0 +1,125 @@
+/* ===========================================
+    共通ヘッダー
+=========================================== */
+
+.site-header {
+  padding: 16px 24px;
+  background-color: #f8fafc;
+  border-bottom: 1px solid #ddd;
+}
+
+/* アプリ名・ユーザー情報 */
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.site-title {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+/* ユーザー情報 */
+.header-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-user form {
+  margin: 0;
+}
+
+/* PC用ナビゲーション */
+.header-nav-pc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.header-nav-pc a,
+.header-nav-guest a {
+  display: inline-block;
+  padding: 10px 12px;
+  color: #333;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.header-nav-pc:hover,
+.header-nav-guest a:hover {
+  background-color: #e2e8f0;
+}
+
+/* スマートフォン用メニューは非表示 */
+.header-nav-mobile {
+  display: none;
+}
+
+/* =======================================
+    スマートフォン用
+======================================= */
+
+@media screen and (max-width: 767px) {
+
+  .site-header {
+    padding: 12px 16px;
+  }
+
+  .header-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .site-title {
+    font-size: 1.25rem;
+  }
+
+  .header-user {
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  /* PC用ナビゲーションを非表示 */
+  .header-nav-pc {
+    display: none;
+  }
+
+  /* スマートフォン用メニューを表示 */
+  .header-nav-mobile {
+    display: block;
+    margin-top: 16px;
+  }
+
+  .header-nav-mobile summary {
+    padding: 12px;
+    background-color: #e2e8f0;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .header-nav-mobile nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px 0;
+  }
+
+  .header-nav-mobile nav a {
+    display: block;
+    padding: 12px;
+    color: #333;
+    text-decoration: none;
+    border-bottom: 1px solid #eee;
+  }
+
+  .header-nav-mobile nav a:hover {
+    background-color: #f1f5f9;
+  }
+}

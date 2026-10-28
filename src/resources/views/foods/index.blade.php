@@ -2,9 +2,14 @@
 
 @section('title', '食材一覧')
 
+{{-- 食材管理専用CSS --}}
+@push('styles')
+  @vite('resources/css/foods.css')
+@endpush
+
 @section('content')
 
-  <h1>食材一覧</h1>
+  <h2>食材一覧</h2>
 
   {{-- 登録・更新の成功メッセージ --}}
   @if (session('success'))
@@ -35,18 +40,20 @@
           <td>{{ $food->category->name }}</td>
           <td>{{ $food->unit }}</td>
           <td>
-            <a href="{{route('foods.edit', $food) }}">編集</a>
+            <div class="food-actions">
+              <a href="{{route('foods.edit', $food) }}">編集</a>
 
-            <form action="{{ route('foods.destroy', $food) }}"
-              method="POST"
-              style="display: inline;"
-              onsubmit="return confirm('この得材を削除しますか？');">
+              <form action="{{ route('foods.destroy', $food) }}"
+                method="POST"
+                class="delete-form"
+                onsubmit="return confirm('この食材を削除しますか？');">
 
-              @csrf
-              @method('DELETE')
+                @csrf
+                @method('DELETE')
 
-              <button type="submit">削除</button>
-            </form>
+                <button type="submit">削除</button>
+              </form>
+            </div>
           </td>
         </tr>
       @endforeach

@@ -2,11 +2,16 @@
 
 @section('title', '購入登録')
 
+{{-- 在庫管理専用CSS --}}
+@push('styles')
+  @vite('resources/css/stocks.css')
+@endpush
+
 @section('content')
 
   <h2>購入（入庫）登録</h2>
 
-  <form action="{{ route('stocks.in.store') }}" method="POST">
+  <form action="{{ route('stocks.in.store') }}" novalidate method="POST">
     @csrf
 
     <div>
@@ -24,7 +29,7 @@
       </select>
 
       @error('food_id')
-        <p style="color:red;">{{ $message }}</p>
+        <p class="form-error">{{ $message }}</p>
       @enderror
     </div>
 
@@ -42,7 +47,7 @@
       >
 
       @error('qty')
-        <p style="color;">{{ $message }}</p>
+        <p class="form-error">{{ $message }}</p>
       @enderror
     </div>
 

@@ -4,17 +4,34 @@ namespace App\Http\Controllers;
 
 use App\Models\Food;
 use App\Models\StockLog;
+use App\Models\Category;
 use App\Http\Requests\StoreStockInRequest;
 use App\Http\Requests\StoreStockOutRequest;
 use App\Http\Requests\SearchStockLogRequest;
+use App\Http\Requests\SearchStockRequest;
 
 class StockController extends Controller
 {
-    public function index()
+    public function index(SearchStockRequest $request)
     {
-        $foods = Food::with('category', 'stockLogs')->get();
+        $data = $request->validated();
 
-        return view('stocks.index', compact('foods'));
+        // カテゴリ一覧を取得
+        $categories = Category::orderBy('id')->get();
+
+        // 在庫一覧を取得
+        $foods = Food::with('category', 'stockLogs')
+            ->when(!empty($data['q']), function ($query) use ($data) {
+                $query->where('name', 'like', '%' . $data['q'] . '%');
+            })
+            ->when(!empty($data['category_id']), function ($query) use ($data) {
+                $query->where('category_id', $data['category_id']);
+            })
+            ->orderBy('name')
+            ->paginate(10)
+            ->withQueryString();
+
+        return view('stocks.index', compact('foods', 'categories'));
     }
 
     public function createIn()
@@ -72,7 +89,7 @@ class StockController extends Controller
         if ($data['qty'] > $currentQty) {
             return back()
                 ->withErrors([
-                    'qty' => '在庫が不足しています。現在庫：' .$currentQty . $food->unit,
+                    'qty' => '在庫が不足しています。現在庫：' . $currentQty . $food->unit,
                 ])
                 ->withInput();
         }
@@ -89,7 +106,7 @@ class StockController extends Controller
             ->route('stocks.index')
             ->with('success', '使用情報を登録しました。');
     }
-    
+
     public function logs(SearchStockLogRequest $request)
     {
         $foods = Food::orderBy('name')->get();

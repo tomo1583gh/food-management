@@ -2,15 +2,21 @@
 
 @section('title', '食材登録')
 
+{{-- 食材管理専用CSS --}}
+@push('styles')
+  @vite('resources/css/foods.css')
+@endpush
+
 @section('content')
 
-  <h1>食材登録</h1>
+  <h2>食材登録</h2>
 
     <form action="{{ route('foods.store') }}" method="POST">
       @csrf
 
       <div>
         <label for="name">食材名</label>
+        
         <input type="text" id="name" name="name">
       
         @error('name')
@@ -20,6 +26,7 @@
 
       <div>
         <label for="category_id">カテゴリー</label>
+        
         <select is="category_id" name="category_id">
           @foreach ($categories as $category)
             <option value="{{ $category->id }}"
@@ -36,10 +43,36 @@
 
       <div>
         <label for="unit">単位</label>
+        
         <input type="text" id="unit" name="unit">
       
         @error('unit')
           <div>{{ $message }}</div>
+        @enderror
+      </div>
+
+      <div>
+        <label for="min_qty">最低在庫数</label>
+        
+        <input
+          type="number"
+          name="min_qty"
+          id="min_qty"
+          value="{{old('min_qty', 0) }}"
+          min="0"
+          step="0.01"
+          required
+        >
+
+        <p id="min_qty_help">
+          <small>
+            現在庫がこの数量以下になると「残りわずか」と表示されます。
+            在庫が0の場合は「在庫なし」と表示されます。
+          </small>
+        </p>
+
+        @error('min_qty')
+          <p class="form-error">{{ $message }}</p>
         @enderror
       </div>
 

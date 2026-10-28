@@ -1,0 +1,374 @@
+/* =========================================
+    在庫一覧
+========================================= */
+
+/* PC表示 */
+.stock-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.stock-table th,
+.stock-table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+/* PCではラベルを非表示 */
+.stock-label {
+  display: none;
+}
+
+/* ========================================
+    スマートフォン表示
+======================================== */
+
+@media screen and (max-width: 767px) {
+
+  /* テーブルをカード形式に変更 */
+  .stock-table,
+  .stock-table tbody,
+  .stock-table tr,
+  .stock-table td {
+    display: block;
+  }
+
+  /* PC用の見出しを非表示 */
+  .stock-table thead {
+    display: none;
+  }
+
+  /* 食材ごとのカード */
+  .stock-table tbody tr {
+    margin-bottom: 16px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+  }
+
+  /* カード内の各項目 */
+  .stock-table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    overflow-wrap: anywhere;
+  }
+
+  .stock-table td:last-child {
+    border-bottom: none;
+  }
+
+  /* 項目名 */
+  .stock-table .stock-label {
+    display: inline;
+    font-weight: bold;
+    color: #555;
+    flex: 0 0 100px;
+  }
+
+  /* 項目の値 */
+  .stock-table .stock-value {
+    flex: 1;
+    min-width: 0;
+    text-align: right;
+  }
+
+  /* 食材名を強調 */
+  .stock-table td:first-child {
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+
+  /* 登録データが無い場合 */
+  .stock-table td[colspan] {
+    display: block;
+  }
+
+  .stock-table td[colspan]::before {
+    content: none;
+  }
+}
+
+/* ==============================================
+    在庫状況の色分け　（PC・スマホ共通）
+=============================================  */
+
+.stock-status {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+/* 在庫あり */
+.stock-status--available {
+  color: #166534;
+  background-color: #dcfce7;
+}
+
+/* 残りわずか */
+.stock-status--low {
+  color: #854d0e;
+  background-color: #fef9c3;
+}
+
+/* 在庫なし */
+.stock-status--empty {
+  color: #991b1b;
+  background-color: #fee2e2;
+}
+
+/* ===============================================
+    在庫検索フォーム
+=============================================== */
+
+/* PC表示 */
+stock-search-form {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stock-search-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+} 
+
+.stock-search-field input,
+.stock-search-field select {
+  box-sizing: border-box;
+  padding: 8px;
+  min-height: 40px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+}
+
+.stock-search-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stock-search-actions button {
+  padding: 8px 20px;
+  min-height: 40px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+
+/* スマートフォン表示 */
+@media screen and (max-width: 767px) {
+  .stock-search-form {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .stock-search-field input,
+  .stock-search-field select {
+    width: 100%;
+  }
+
+  .stock-search-actions button {
+    flex: 1;
+  }
+}
+
+/* ===================================================
+    ページネーション
+=================================================== */
+
+.stock-pagination {
+  margin-top: 24px;
+}
+
+/* ページ番号を横並びにする */
+.stock-pagination .pagination {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  margin: 16px 0;
+  list-style: none;
+}
+
+/* ページ番号と前後ボタン */
+.stock-pagination .page-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #333;
+  text-decoration: none;
+} 
+
+/* 現在のページ */
+.stock-pagination .page-item.active .page-link {
+  background-color: #2563eb;
+  border-color: #2563eb;
+  color: #fff;
+  font-weight: bold;
+}
+
+/* 操作できないボタン */
+.stock-pagination .page-item.disable .page-link {
+  background-color: #f5f5f5;
+  color: #999;
+  cursor: default;
+}
+
+/* マウスを重ねたとき */
+.stock-pagination .page-item:not('active'):not(.disabled) .page-link:hover {
+  background-color: #f0f4ff;
+}
+
+/* ページネーションの説明文 */
+.stock-pagination > div > div >p {
+  text-align: center;
+  color: #666;
+}
+
+/* ======================================================
+    ページネーションの表示切り替え
+====================================================== */
+
+/* PCでは簡易表示を非表示 */
+.stock-pagination > nav > div:first-child {
+  display: none;
+}
+
+/* スマートフォン表示 */
+@media screen and (max-width: 767px) {
+
+  /* 簡易版を表示 */
+  .stock-pagination > nav > div:first-child {
+    display: block;
+  }
+
+  .stock-pagination > nav > div:last-child {
+    display: none;
+  }
+}
+
+/* ======================================================
+    在庫一覧：検索フォーム
+====================================================== */
+
+
+/* フォーム全体 */
+.stock-search-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+/* 各入力欄 */
+.stock-search-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1 1 240px;
+  max-width: 360px;
+}
+
+.stock-search-field label {
+  font-weight: bold;
+}
+
+/* テキスト入力・セレクト */
+.stock-search-field input,
+.stock-search-field select {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  font: inherit;
+}
+
+/* 検索ボタン・リセット */
+.stock-search-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stock-search-actions button,
+.stock-search-actions a {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 検索ボタン */
+.stock-search-actions button {
+  border: 1px solid #2563eb;
+  background-color: #2563eb;
+  color: #fff;
+}
+
+/* リセットリンク */
+.stock-search-actions a {
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+}
+
+/* ======================================
+    スマートフォン表示
+====================================== */
+
+@media screen and (max-width: 767px) {
+
+  .stock-search-form {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .stock-search-field {
+    flex: none;
+    width: 100%;
+    max-width: none;
+  }
+
+  .stock-search-actions {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .stock-search-actions button,
+  .stock-search-actions a {
+    flex: 1;
+    min-width: 0;
+  }
+}

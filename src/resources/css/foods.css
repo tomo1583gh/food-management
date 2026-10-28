@@ -1,0 +1,11 @@
+/* 食材一覧：削除フォーム */
+.delete-form {
+  display: inline;
+}
+
+/* 食材一覧：操作ボタン */
+.food-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

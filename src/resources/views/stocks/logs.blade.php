@@ -2,6 +2,11 @@
 
 @section('title', '入出庫履歴')
 
+{{-- 在庫管理専用CSS --}}
+@push('styles')
+  @vite('resources/css/stocks.css')
+@endpush
+
 @section('content')
 
   <h2>入出庫履歴</h2>
@@ -23,7 +28,7 @@
       </select>
 
       @error('food_id')
-      <p style="color: red;">{{ $message }}</p>
+      <p class="form-error">{{ $message }}</p>
       @enderror
     </div>
 
@@ -41,7 +46,7 @@
       </select>
 
       @error('type')
-        <p style="color: red;">{{ $message }}</p>
+        <p class="form-error">{{ $message }}</p>
       @enderror
     </div>
 

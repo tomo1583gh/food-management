@@ -89,6 +89,4 @@ class FoodController extends Controller
             ->route('foods.index')
             ->with('success', '食材を削除しました。');
     }
-
-    
 }

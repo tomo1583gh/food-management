@@ -3,14 +3,19 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\StockController;
+use App\Http\Controllers\DashboardController;
 
 // トップページ
 Route::get('/', function () {
-    return redirect()->route('login');
+    return redirect()->route('dashboard.index');
 });
 
 // ログインが必要なページ
 Route::middleware('auth')->group(function () {
+
+    // ダッシュボード
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->name('dashboard.index');
 
     // 食材管理
     Route::resource('foods', FoodController::class);

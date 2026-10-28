@@ -35,4 +35,12 @@ class SearchStockLogRequest extends FormRequest
             'type.in' => '入出庫区分の指定が正しくありません。',
         ];
     }
+
+    public function attributes(): array
+    {
+        return [
+            'food_id' => '食材',
+            'type' => '入出庫区分',
+        ];
+    }
 }

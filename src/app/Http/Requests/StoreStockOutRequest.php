@@ -45,4 +45,12 @@ class StoreStockOutRequest extends FormRequest
             'qty.max' => '使用数量が上限を超えています。',
         ];
     }
+
+    public function attributes(): array
+    {
+        return [
+            'food_id' => '食材',
+            'qty' => '数量',
+        ];
+    }
 }
