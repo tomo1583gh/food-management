@@ -11,23 +11,37 @@
 
   <h2>食材登録</h2>
 
-    <form action="{{ route('foods.store') }}" method="POST">
+    <form
+      action="{{ route('foods.store') }}"
+      method="POST"
+      class="food-form"
+    >
       @csrf
 
-      <div>
+      <div class="food-form-field">
         <label for="name">食材名</label>
         
-        <input type="text" id="name" name="name">
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value="{{ old('name') }}"
+          @error('name') aria-invalid="true" @enderror
+        >
       
         @error('name')
-          <div>{{ $message }}</div>
+          <p class="form-error">{{ $message }}</p>
         @enderror
       </div>
 
-      <div>
+      <div class="food-form-field">
         <label for="category_id">カテゴリー</label>
         
-        <select is="category_id" name="category_id">
+        <select
+          id="category_id"
+          name="category_id"
+          @error('category_id') aria-invalid="true" @enderror
+        >
           @foreach ($categories as $category)
             <option value="{{ $category->id }}"
               {{ old('category_id') == $category->id ? 'selected' : '' }}>
@@ -37,21 +51,27 @@
         </select>
 
         @error('category_id')
-            <div>{{ $message }}</div>
+            <p class="form-error">{{ $message }}</p>
         @enderror
       </div>
 
-      <div>
+      <div class="food-form-field">
         <label for="unit">単位</label>
         
-        <input type="text" id="unit" name="unit">
-      
+        <input
+          type="text"
+          id="unit"
+          name="unit"
+          value="{{ old('unit') }}"
+          @error('unit') aria-invalid="true" @enderror
+        >
+
         @error('unit')
-          <div>{{ $message }}</div>
+          <p class="form-error">{{ $message }}</p>
         @enderror
       </div>
 
-      <div>
+      <div class="food-form-field">
         <label for="min_qty">最低在庫数</label>
         
         <input
@@ -62,6 +82,8 @@
           min="0"
           step="0.01"
           required
+          aria-describedby="min_qty_help"
+          @error('min_qty') aria-invalid="true" @enderror
         >
 
         <p id="min_qty_help">
@@ -76,9 +98,14 @@
         @enderror
       </div>
 
-      <button type="submit">登録</button>
-    </form>
+      {{-- 更新・戻るボタン --}}
+      <div class="food-form-actions">
+        <button type="submit">登録</button>
 
-    <a href="{{ route('foods.index') }}">一覧へ戻る</a>
+        <a href="{{ route('foods.index') }}" class="food-back-button">
+          一覧に戻る
+        </a>
+      </div>
+    </form>
 
 @endsection

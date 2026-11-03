@@ -21,9 +21,13 @@
     <p>{{ session('error') }}</p>
   @endif
 
-  <a href="{{ route('foods.create') }}">新しい食材を登録</a>
+  <div class="food-create-action">
+    <a href="{{ route('foods.create') }}" class="food-create-button">
+      ＋ 新しい食材を登録
+    </a>
+  </div>
 
-  <table>
+  <table class="food-table">
     <thead>
       <tr>
         <th>食材名</th>
@@ -36,14 +40,29 @@
     <tbody>
       @foreach ($foods as $food)
         <tr>
-          <td>{{ $food->name }}</td>
-          <td>{{ $food->category->name }}</td>
-          <td>{{ $food->unit }}</td>
           <td>
+            <span class="food-label">食材名</span>
+            <span class="food-value">{{ $food->name }}</span>
+          </td>
+
+          <td>
+            <span class="food-label">カテゴリー</span>
+            <span class="food-value">{{ $food->category->name }}</span>
+          </td>
+
+          <td>
+            <span class="food-label">単位</span>
+            <span class="food-value">{{ $food->unit }}</span>
+          </td>
+
+          <td>
+            <span class="food-label">操作</span>
+
             <div class="food-actions">
               <a href="{{route('foods.edit', $food) }}">編集</a>
 
-              <form action="{{ route('foods.destroy', $food) }}"
+              <form 
+                action="{{ route('foods.destroy', $food) }}"
                 method="POST"
                 class="delete-form"
                 onsubmit="return confirm('この食材を削除しますか？');">
@@ -59,6 +78,11 @@
       @endforeach
     </tbody>
   </table>
+
+  {{-- ページネーション --}}
+  <div class="app-pagination">
+    {{ $foods->links('pagination::bootstrap-5') }}
+  </div>
 
 @endsection
   

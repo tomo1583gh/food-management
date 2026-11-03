@@ -1,3 +1,7 @@
+/* ==================================================
+    食材一覧
+================================================== */
+
 /* 食材一覧：削除フォーム */
 .delete-form {
   display: inline;
@@ -9,3 +13,284 @@
   align-items: center;
   gap: 8px;
 }
+
+.food-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.food-table th,
+.food-table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+/* PCでは項目名を非表示 */
+.food-table .food-label {
+  display: none;
+}
+
+/* ==============================================
+    操作ボタン
+=============================================  */
+
+/* 編集ボタン */
+.food-table .food-actions a {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 16px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  background-color: #2563eb;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* 削除ボタン */
+.food-table .food-actions button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 16px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #dc2626;
+  border: 1px solid #dc2626;
+  cursor: pointer;
+}
+
+/* ==================================================
+    食材登録ボタン
+================================================== */
+
+/* 新規要録ボタンの配置 */
+.food-create-action {
+  margin: 20px 0;
+}
+
+/* 新規登録ボタン */
+.food-create-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 16px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  background-color: #2563eb;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.food-create-button:hover {
+  background-color: #166534;
+}
+
+/* ==================================================
+    スマートフォン表示
+================================================== */
+
+@media screen and (max-width: 767px) {
+
+  /* テーブルをカード形式に変更 */
+  .food-table,
+  .food-table tbody,
+  .food-table tr,
+  .food-table td {
+    display: block;
+  }
+
+  /* PC用の見出しを非表示 */
+  .food-table thead {
+    display: none;
+  }
+
+  /* 食材ごとのカード */
+  .food-table tbody tr {
+    margin-bottom: 16px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+  }
+
+  .food-table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    overflow-wrap: anywhere;
+  }
+
+  .food-table td:last-child {
+    border-bottom: none;
+  }
+
+    /* カード内の各項目 */
+    .food-table .food-label {
+      display: inline;
+      flex: 0 0 100px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    /* 値 */
+  .food-table .food-value {
+    flex: 1;
+    min-width: 0;
+    margin-left: auto;
+    text-align: right;
+  }
+
+  /* 食材名を強調 */
+  .food-table td:first-child {
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+
+  /* 編集・削除ボタン */
+  .food-table .food-actions {
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    min-width: 0;
+  }
+
+  /* スマートフォンでは登録ボタンを横幅いっぱいにする */
+  .food-create-button {
+    display: flex;
+    width: 100%;
+  }
+}
+
+/* ==================================================
+    食材登録・編集フォーム
+================================================== */
+
+/* フォーム全体 */
+.food-form {
+  width: 100%;
+  max-width: 520px;
+  box-sizing: border-box;
+  margin-bottom: 16px;
+}
+
+/* 各入力項目 */
+.food-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+/* ラベル */
+.food-form-field label {
+  font-weight: bold;
+}
+
+/* 入力欄 */
+.food-form-field input,
+.food-form-field select {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  font: inherit;
+}
+
+/* 入力欄を選択したとき */
+.food-form-field input:focus,
+.food-form-field select:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 1px;
+}
+
+/* 最低在庫数の説明文 */
+.food-form-field #min_qty_help {
+  margin: 4px 0 0;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* 登録・更新ボタン */
+.food-form button[type="submit"] {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 24px;
+  border: 1px solid #2563eb;
+  border-radius: 6px;
+  background-color: #2563eb;
+  color: #fff;
+  font: inherit;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* 入力エラーメッセージ */
+.food-form .food-error {
+  margin: 4px 0 0;
+  color: #dc2626;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* エラーがある入力欄 */
+.food-form-field input[aria-invalid="true"],
+.food-form-field select[aria-invalid="true"] {
+  border-color: #dc2626;
+}
+
+.food-back-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 24px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #333;
+  text-decoration: none;
+  font: inherit;
+}
+
+.food-back-button:hover {
+  background-color: #f3f4f6;
+}
+
+/* スマートフォン表示 */
+@media screen and (max-width: 767px) {
+  .food-form {
+    max-width: none;
+  }
+
+  .food-form button[type="submit"] {
+    width: 100%;
+  }
+
+  .food-form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .food-back-button {
+    width: 100%;
+  }
+}
+
+

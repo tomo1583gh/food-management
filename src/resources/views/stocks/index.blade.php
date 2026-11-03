@@ -124,7 +124,7 @@
     </tbody>
   </table>
 
-  <div class="stock-pagination">
+  <div class="app-pagination">
     {{ $foods->links('pagination::bootstrap-5') }}
   </div>
 
