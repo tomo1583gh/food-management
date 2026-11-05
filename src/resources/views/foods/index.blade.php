@@ -38,7 +38,7 @@
     </thead>
 
     <tbody>
-      @foreach ($foods as $food)
+      @forelse ($foods as $food)
         <tr>
           <td>
             <span class="food-label">食材名</span>
@@ -75,7 +75,14 @@
             </div>
           </td>
         </tr>
-      @endforeach
+
+      @empty
+        <tr class="food-empty-row">
+          <td colspan="4">
+            食材が登録されていません。
+          </td>
+        </tr>
+      @endforelse
     </tbody>
   </table>
 

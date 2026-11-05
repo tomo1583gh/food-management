@@ -1,0 +1,192 @@
+/* =========================================
+    ダッシュボード：集計カード
+========================================= */
+
+.dashboard-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 16px;
+  margin: 24px 32px;
+}
+
+.dashboard-card {
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.dashboard-card h3 {
+  margin: 0 0 12px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.dashboard-card-value {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: bold;
+  overflow-wrap: anywhere;
+}
+
+.dashboard-card-value span {
+  font-size: 0.9rem;
+  font-weight: normal;
+  color: #666;
+}
+
+/* 在庫なし */
+.dashboard-card--empty .dashboard-card-value {
+  color: #991b1b;
+}
+
+/* 残りわずか */
+.dashboard-card--low .dashboard-card-value {
+  color: #854d0e;
+}
+
+/* =========================================
+    補充候補一覧
+========================================= */
+
+.dashboard-section {
+  margin-top: 24px;
+}
+
+.dashboard-section h3 {
+  margin-bottom: 16px;
+}
+
+.dashboard-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.dashboard-table th,
+.dashboard-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.dashboard-label {
+  display: none;
+}
+
+/* 在庫状況 */
+.dashboard-status {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.dashboard-status--empty {
+  color: #991b1b;
+  background-color: #fee2e2;
+}
+
+.dashboard-status--low {
+  color: #854d0e;
+  background-color: #fef9c3;
+}
+
+/* 補充候補なし */
+.dashboard-empty-row td {
+  padding: 24px 12px;
+  text-align: center;
+  color: #666;
+}
+
+/* =========================================
+    スマートフォン表示
+========================================= */
+
+@media screen and (max-width: 767px) {
+
+  /* 集計カードを縦並びに */
+  .dashboard-summary {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .dashboard-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .dashboard-card h3 {
+    margin: 0;
+  }
+
+  dashboard-card-value {
+    font-size: 1.6rem;
+    text-align: right;
+  }
+
+  /* 補充候補をカード形式に */
+  .dashboard-table,
+  .dashboard-table tbody,
+  .dashboard-table tr,
+  .dashboard-table td {
+    display: block;
+  }
+
+  .dashboard-table thead {
+    display: none;
+  }
+
+  .dashboard-table tbody tr {
+    margin-bottom: 16px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+  }
+
+  .dashboard-table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    overflow-wrap: anywhere;
+  }
+
+  .dashboard-table td:last-child {
+    border-bottom: none;
+  }
+
+  .dashboard-label {
+    display: inline;
+    flex: 0 0 100px;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .dashboard-value {
+    flex: 1;
+    min-width: 0;
+    text-align: right;
+  }
+
+  /* 食材名を強調 */
+  .dashboard-table td:first-child .dashboard-value {
+    font-weight: bold;
+  }
+
+  /* 補充候補が無い場合 */
+  .dashboard-table .dashboard-empty-row td {
+    display: block;
+    padding: 12px;
+    text-align: center;
+    border-bottom: none;
+  }
+}

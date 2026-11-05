@@ -20,80 +20,6 @@
   display: none;
 }
 
-/* ========================================
-    スマートフォン表示
-======================================== */
-
-@media screen and (max-width: 767px) {
-
-  /* テーブルをカード形式に変更 */
-  .stock-table,
-  .stock-table tbody,
-  .stock-table tr,
-  .stock-table td {
-    display: block;
-  }
-
-  /* PC用の見出しを非表示 */
-  .stock-table thead {
-    display: none;
-  }
-
-  /* 食材ごとのカード */
-  .stock-table tbody tr {
-    margin-bottom: 16px;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #fff;
-  }
-
-  /* カード内の各項目 */
-  .stock-table td {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-    padding: 8px 0;
-    border-bottom: 1px solid #eee;
-    overflow-wrap: anywhere;
-  }
-
-  .stock-table td:last-child {
-    border-bottom: none;
-  }
-
-  /* 項目名 */
-  .stock-table .stock-label {
-    display: inline;
-    font-weight: bold;
-    color: #555;
-    flex: 0 0 100px;
-  }
-
-  /* 項目の値 */
-  .stock-table .stock-value {
-    flex: 1;
-    min-width: 0;
-    text-align: right;
-  }
-
-  /* 食材名を強調 */
-  .stock-table td:first-child {
-    font-size: 1.1rem;
-    font-weight: bold;
-  }
-
-  /* 登録データが無い場合 */
-  .stock-table td[colspan] {
-    display: block;
-  }
-
-  .stock-table td[colspan]::before {
-    content: none;
-  }
-}
-
 /* ==============================================
     在庫状況の色分け　（PC・スマホ共通）
 =============================================  */
@@ -130,7 +56,7 @@
 =============================================== */
 
 /* PC表示 */
-stock-search-form {
+.stock-search-form {
   display: flex;
   align-items: flex-end;
   flex-wrap: wrap;
@@ -166,24 +92,6 @@ stock-search-form {
   border-radius: 4px;
   background-color: #f5f5f5;
   cursor: pointer;
-}
-
-/* スマートフォン表示 */
-@media screen and (max-width: 767px) {
-  .stock-search-form {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
-  }
-
-  .stock-search-field input,
-  .stock-search-field select {
-    width: 100%;
-  }
-
-  .stock-search-actions button {
-    flex: 1;
-  }
 }
 
 /* ======================================================
@@ -261,32 +169,270 @@ stock-search-form {
   color: #333;
 }
 
-/* ======================================
+/* ======================================================
+    購入・試用登録フォーム
+====================================================== */
+
+.stock-form {
+  width: 100%;
+  max-width: 600px;
+  margin-top: 24px;
+}
+
+/* 入力項目 */
+.stock-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.stock-form-field label {
+  font-weight: bold;
+}
+
+/* 入力欄 */
+.stock-form-field input,
+.stock-form-field select {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 44px;
+  padding:10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  font: inherit;
+}
+
+/* フォーカス時 */
+.stock-form-field input:focus,
+.stock-form-field select:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 1px;
+}
+
+/* バリデーションエラー */
+.stock-form-field [aria-invalid="true"] {
+  border-color: #dc2626;
+}
+
+.stock-form-field [aria-invalid="true"]:focus {
+  outline-color: #dc2626;
+}
+
+/* 操作ボタン */
+.stock-form-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.stock-form-actions button,
+.stock-back-button {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 登録ボタン */
+.stock-form-actions button {
+  border: 1px solid #2563eb;
+  background-color: #2563eb;
+  color: #fff;
+}
+
+/* 戻るボタン */
+.stock-back-button {
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+}
+
+/* =========================================
+    入出庫履歴画面
+========================================= */
+
+/* 履歴一覧と検索フォームの間隔 */
+.stock-log-table {
+  margin-top: 24px;
+}
+
+/* 戻るボタン */
+.stock-log-footer {
+  margin-top: 24px;
+}
+
+/* 履歴が存在しない場合 */
+.stock-log-empty-row td {
+  text-align: center;
+  padding: 24px 12px;
+  color: #666;
+}
+
+/* ========================================
     スマートフォン表示
-====================================== */
+======================================== */
 
 @media screen and (max-width: 767px) {
+
+  /* テーブルをカード形式に変更 */
+  .stock-table,
+  .stock-table tbody,
+  .stock-table tr,
+  .stock-table td {
+    display: block;
+  }
+
+  /* PC用の見出しを非表示 */
+  .stock-table thead {
+    display: none;
+  }
+
+  /* 食材ごとのカード */
+  .stock-table tbody tr {
+    margin-bottom: 16px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+  }
+
+  /* カード内の各項目 */
+  .stock-table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    overflow-wrap: anywhere;
+  }
+
+  .stock-table td:last-child {
+    border-bottom: none;
+  }
+
+  /* 項目名 */
+  .stock-table .stock-label {
+    display: inline;
+    font-weight: bold;
+    color: #555;
+    flex: 0 0 100px;
+  }
+
+  /* 項目の値 */
+  .stock-table .stock-value {
+    flex: 1;
+    min-width: 0;
+    text-align: right;
+  }
+
+  /* 食材名を強調 */
+  .stock-table td:first-child {
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+
+  /* 登録データが無い場合 */
+  .stock-table td[colspan] {
+    display: block;
+  }
+
+  .stock-table td[colspan]::before {
+    content: none;
+  }
+
+    
+  .stock-search-form {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  
+  .stock-search-field input,
+  .stock-search-field select {
+    width: 100%;
+  }
+  
+  .stock-search-actions button {
+    flex: 1;
+  }
 
   .stock-search-form {
     flex-direction: column;
     align-items: stretch;
     gap: 12px;
   }
-
+  
   .stock-search-field {
     flex: none;
     width: 100%;
     max-width: none;
   }
-
+  
   .stock-search-actions {
     width: 100%;
     gap: 10px;
   }
-
+  
   .stock-search-actions button,
   .stock-search-actions a {
     flex: 1;
     min-width: 0;
+  }
+
+  /* =========================================
+      購入・使用登録フォーム
+  ========================================= */
+
+  .stock-form {
+    max-width: none;
+  }
+
+  .stock-form-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .stock-form-actions button,
+  .stock-back-button {
+    width: 100%;
+  }
+
+    /* =========================================
+      入出庫履歴画面
+  ========================================= */
+
+  /* 履歴の日時は通常の文字サイズで表示 */
+  .stock-log-table td:first-child {
+    font-size: 1rem;
+    font-weight: normal;
+  }
+
+  /* 食材名を強調 */
+  .stock-log-table {
+    font-weight: bold;
+  }
+
+  /* 履歴なしの表示 */
+  .stock-log-footer .stock-log-empty-row td {
+    display: block;
+    text-align: center;
+    padding: 12px;
+    border-bottom: none;
+  }
+
+  /* 戻るボタン */
+  .stock-log-footer .stock-back-button {
+    width: 100%;
   }
 }

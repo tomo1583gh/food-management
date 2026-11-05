@@ -11,17 +11,24 @@
 
   <h2>入出庫履歴</h2>
 
-  <form action="{{ route('stocks.logs') }}" method="GET">
+  {{--  検索フォーム --}}
+  <form
+    action="{{ route('stocks.logs') }}"
+    method="GET"
+    class="stock-search-form"
+  >
 
-    <div>
+    <div class="stock-search-field">
       <label for="food_id">食材</label>
 
       <select name="food_id" id="food_id">
         <option value="">すべての食材</option>
 
         @foreach ($foods as $food)
-          <option value="{{ $food->id }}"
-            {{ request('food_id') == $food->id ? 'selected' : '' }}>
+          <option
+            value="{{ $food->id }}"
+            {{ request('food_id') == $food->id ? 'selected' : '' }}
+          >
             {{ $food->name }}
           </option>
         @endforeach
@@ -32,7 +39,8 @@
       @enderror
     </div>
 
-    <div>
+
+    <div class="stock-search-field">
       <label for="type">区分</label>
 
       <select name="type" id="type">
@@ -50,13 +58,16 @@
       @enderror
     </div>
 
+    <div class="stock-search-actions">
     <button type="submit">検索</button>
 
-    <a href="{{ route('stocks.logs') }}">リセット</a>
+      <a href="{{ route('stocks.logs') }}">リセット</a>
+    </div>
 
   </form>
 
-  <table>
+  {{-- 入出庫履歴一覧 --}}
+  <table class="stock-table stock-log-table">
     <thead>
       <tr>
         <th>日時</th>
@@ -70,33 +81,60 @@
     <tbody>
       @forelse ($logs as $log)
         <tr>
-          <td>{{ $log->created_at->format('Y/m/d H:i') }}</td>
-
-          <td>{{ $log->food->name }}</td>
-
-          <td>{{ $log->type === 'in' ? '購入' : '使用' }}</td>
-
           <td>
-            {{ $log->type === 'in' ? '+' : '-' }}
-            {{ $log->qty }} {{ $log->food->unit }}
+            <span class="stock-label">日時</span>
+            <span class="stock-value">
+              {{ $log->created_at->format('Y/m/d H:i') }}
+            </span>
           </td>
 
-          <td>{{ $log->user->name }}</td>
+          <td>
+            <span class="stock-label">食材名</span>
+            <span class="stock-value">
+              {{ $log->food->name }}
+            </span>
+          </td>
+
+          <td>
+            <span class="stock-label">区分</span>
+            <span class="stock-value">
+              {{ $log->type === 'in' ? '購入' : '使用' }}
+            </span>
+          </td>
+
+          <td>
+            <span class="stock-label">数量</span>
+            <span class="stock-value">
+              {{ $log->type === 'in' ? '+' : '-' }}
+              {{ $log->qty }} {{ $log->food->unit }}
+            </span>
+          </td>
+
+          <td>
+            <span class="stock-label">登録者</span>
+            <span class="stock-value">
+              {{ $log->user->name }}
+            </span>
+          </td>
         </tr>
       @empty
-          <tr>
+          <tr class="stock-log-empty-row">
             <td colspan="5">入出庫履歴はありません。</td>
           </tr>
       @endforelse
     </tbody>
   </table>
 
-  <div>
-    {{ $logs->links() }}
+  {{-- ページネーション --}}
+  <div class="app-pagination">
+    {{ $logs->links('pagination::bootstrap-5') }}
   </div>
 
-  <p>
-    <a href="{{ route('stocks.index') }}">在庫一覧に戻る</a>
-  </p>
+  {{-- 戻るボタン --}}
+  <div class="stock-log-footer">
+    <a href="{{ route('stocks.index') }}" class="stock-back-button">
+      在庫一覧に戻る
+    </a>
+  </div>
 
 @endsection

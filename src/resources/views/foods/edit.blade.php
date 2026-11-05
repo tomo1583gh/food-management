@@ -15,6 +15,7 @@
     action="{{ route('foods.update', $food) }}"
     method="POST"
     class="food-form"
+    novalidate
   >
     @csrf
     @method('PUT')

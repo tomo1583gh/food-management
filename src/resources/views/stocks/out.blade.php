@@ -11,18 +11,29 @@
 
   <h2>使用（出庫）登録</h2>
 
-  <form action="{{ route('stocks.out.store') }}" novalidate method="POST">
+  <form
+    action="{{ route('stocks.out.store') }}"
+    novalidate method="POST"
+    class="stock-form"
+    novalidate
+  >
     @csrf
 
-    <div>
+    {{-- 食材選択 --}}
+    <div class="stock-form-field">
       <label for="food_id">食材</label>
 
-      <select name="food_id" id="food_id" required>
+      <select
+        name="food_id"
+        id="food_id"
+        required
+      >
         <option value="">食材を選択してください</option>
 
         @foreach ($foods as $food)
           <option value="{{ $food->id }}"
-            {{ old('food_id') == $food->id ? 'selected' : '' }}>
+            {{ old('food_id') == $food->id ? 'selected' : '' }}
+          >
             {{ $food->name }} ({{ $food->category->name }})
           </option>
         @endforeach
@@ -33,7 +44,8 @@
       @enderror
     </div>
 
-    <div>
+    {{-- 購入数量 --}}
+    <div class="stock-form-field">
       <label for="qty">使用数量</label>
 
       <input
@@ -44,6 +56,7 @@
         step="0.01"
         value="{{ old('qty') }}"
         required
+        @error('qty') aria-invalid="true" @enderror
       >
 
       @error('qty')
@@ -51,11 +64,17 @@
       @enderror
     </div>
 
-    <button type="submit">使用を登録</button>
-  </form>
+    {{-- 操作ボタン --}}
+    <div class="stock-form-actions">
+      <button type="submit">使用を登録</button>
 
-  <p>
-    <a href="{{route('stocks.index') }}">在庫一覧に戻る</a>
-  </p>
+      <a
+        href="{{route('stocks.index') }}"
+        class="stock-back-button"
+      >
+        在庫一覧に戻る
+      </a>
+    </div>
+  </form>
 
 @endsection

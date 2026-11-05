@@ -15,6 +15,7 @@
       action="{{ route('foods.store') }}"
       method="POST"
       class="food-form"
+      novalidate
     >
       @csrf
 

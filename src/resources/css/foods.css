@@ -92,84 +92,12 @@
   background-color: #166534;
 }
 
-/* ==================================================
-    スマートフォン表示
-================================================== */
-
-@media screen and (max-width: 767px) {
-
-  /* テーブルをカード形式に変更 */
-  .food-table,
-  .food-table tbody,
-  .food-table tr,
-  .food-table td {
-    display: block;
-  }
-
-  /* PC用の見出しを非表示 */
-  .food-table thead {
-    display: none;
-  }
-
-  /* 食材ごとのカード */
-  .food-table tbody tr {
-    margin-bottom: 16px;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #fff;
-  }
-
-  .food-table td {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 10px 0;
-    border-bottom: 1px solid #eee;
-    overflow-wrap: anywhere;
-  }
-
-  .food-table td:last-child {
-    border-bottom: none;
-  }
-
-    /* カード内の各項目 */
-    .food-table .food-label {
-      display: inline;
-      flex: 0 0 100px;
-      font-weight: bold;
-      color: #555;
-    }
-
-    /* 値 */
-  .food-table .food-value {
-    flex: 1;
-    min-width: 0;
-    margin-left: auto;
-    text-align: right;
-  }
-
-  /* 食材名を強調 */
-  .food-table td:first-child {
-    font-size: 1.1rem;
-    font-weight: bold;
-  }
-
-  /* 編集・削除ボタン */
-  .food-table .food-actions {
-    justify-content: flex-end;
-    flex-wrap: wrap;
-    min-width: 0;
-  }
-
-  /* スマートフォンでは登録ボタンを横幅いっぱいにする */
-  .food-create-button {
-    display: flex;
-    width: 100%;
-  }
+/* 食材が0件の場合の表示 */
+.food-table .food-empty-row td {
+  display: table-cell;
+  padding: 24px 12px;
+  text-align: center;
+  color: #666;
 }
 
 /* ==================================================
@@ -273,24 +201,119 @@
   background-color: #f3f4f6;
 }
 
-/* スマートフォン表示 */
+/* ==================================================
+    スマートフォン表示
+================================================== */
+
 @media screen and (max-width: 767px) {
-  .food-form {
-    max-width: none;
+
+  /* テーブルをカード形式に変更 */
+  .food-table,
+  .food-table tbody,
+  .food-table tr,
+  .food-table td {
+    display: block;
   }
 
-  .food-form button[type="submit"] {
+  /* PC用の見出しを非表示 */
+  .food-table thead {
+    display: none;
+  }
+
+  /* 食材ごとのカード */
+  .food-table tbody tr {
+    margin-bottom: 16px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+  }
+
+  .food-table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
     width: 100%;
+    box-sizing: border-box;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    overflow-wrap: anywhere;
   }
 
-  .food-form-actions {
-    flex-direction: column;
-    align-items: stretch;
+  .food-table td:last-child {
+    border-bottom: none;
   }
 
-  .food-back-button {
+    /* カード内の各項目 */
+    .food-table .food-label {
+      display: inline;
+      flex: 0 0 100px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    /* 値 */
+  .food-table .food-value {
+    flex: 1;
+    min-width: 0;
+    margin-left: auto;
+    text-align: right;
+  }
+
+  /* 食材名を強調 */
+  .food-table td:first-child {
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+
+  /* 編集・削除ボタン */
+  .food-table .food-actions {
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    min-width: 0;
+  }
+
+  /* スマートフォンでは登録ボタンを横幅いっぱいにする */
+  .food-create-button {
+    display: flex;
     width: 100%;
   }
 }
+
+.food-form {
+  max-width: none;
+}
+
+.food-form button[type="submit"] {
+  width: 100%;
+}
+
+.food-form-actions {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.food-back-button {
+  width: 100%;
+}
+
+/* 食材が0件の場合 */
+.food-table .food-empty-row {
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.food-table .food-empty-row td {
+  display: block;
+  width: 100%;
+  padding: 20px 12px;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: normal;
+}
+
 
 
