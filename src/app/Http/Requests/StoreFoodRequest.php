@@ -41,7 +41,7 @@ class StoreFoodRequest extends FormRequest
             'category_id.exists' => '選択したカテゴリーが存在しません。',
 
             'unit.required' => '単位を入力してください。',
-            'unit,string' => '単位は文字列で入力してください。',
+            'unit.string' => '単位は文字列で入力してください。',
             'unit.max' => '単位は50文字以内で入力してください。',
 
             'min_qty.required' => '最低在庫数を入力してください。',
