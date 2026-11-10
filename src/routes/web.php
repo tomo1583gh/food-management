@@ -10,8 +10,8 @@ Route::get('/', function () {
     return redirect()->route('dashboard.index');
 });
 
-// ログインが必要なページ
-Route::middleware('auth')->group(function () {
+// ログイン・メール認証が必要なページ
+Route::middleware(['auth', 'verified'])->group(function () {
 
     // ダッシュボード
     Route::get('/dashboard', [DashboardController::class, 'index'])

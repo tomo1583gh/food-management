@@ -13,6 +13,8 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Laravel\Fortify\Actions\RedirectIfTwoFactorAuthenticatable;
 use Laravel\Fortify\Fortify;
+use Illuminate\Auth\Notifications\VerifyEmail;
+use Illuminate\Notifications\Messages\MailMessage;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -38,6 +40,16 @@ class FortifyServiceProvider extends ServiceProvider
             return view('auth.login');
         });
 
+        // 会員登録画面
+        Fortify::registerView(function () {
+            return view('auth.register');
+        });
+
+        // メール認証案内画面
+        Fortify::verifyEmailView(function () {
+            return view('auth.verify-email');
+        });
+
         RateLimiter::for('login', function (Request $request) {
             $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());
 
@@ -54,6 +66,16 @@ class FortifyServiceProvider extends ServiceProvider
             return Limit::perMinute(10)->by(
                 ($credentialId ?: $request->session()->getId()).'|'.$request->ip()
             );
+        });
+
+        VerifyEmail::toMailUsing(function ($notifiable, $url) {
+            return (new MailMessage)
+                ->subject('【食材管理アプリ】メールアドレス認証のお願い')
+                ->greeting('食材管理アプリへようこそ！')
+                ->line('ご登録いただき、ありがとうございます。')
+                ->line('以下のボタンをクリックして、メールアドレスの認証を完了してください。')
+                ->action('メールアドレスを認証する', $url)
+                ->line('このメールに心当たりのない場合は、操作する必要はありません。');
         });
     }
 }
