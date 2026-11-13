@@ -8,12 +8,14 @@ use Tests\TestCase;
 class ExampleTest extends TestCase
 {
     /**
-     * A basic test example.
+     * トップページからダッシュボードへリダイレクトされる
      */
-    public function test_the_application_returns_a_successful_response(): void
+    public function test_root_redirects_to_dashboard(): void
     {
+        // トップページにアクセス
         $response = $this->get('/');
 
-        $response->assertStatus(200);
+        // ダッシュボードへのリダイレクトを確認
+        $response->assertRedirect(route('dashboard.index'));
     }
 }
