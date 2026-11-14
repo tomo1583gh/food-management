@@ -10,6 +10,10 @@ class RefreshDatabaseTest extends TestCase
 {
   use RefreshDatabase;
 
+  /**
+   * テスト中に登録したデータが存在することを確認する
+   * （RefreshDatabaseによってテスト終了後に変更が元に戻される）
+   */
   public function test_database_changes_are_rolled_back(): void
   {
     // テスト用のカテゴリを登録

@@ -31,7 +31,10 @@
         type="text"
         name="name"
         id="name"
-        class="auth-form__input @error('name') auth-form__input--error @enderror"
+        @class([
+          'auth-form__input',
+          'auth-form__input--error' => $errors->has('name'),
+        ])
         value="{{ old('name') }}"
         autocomplete="name"
         maxlength="255"
@@ -53,7 +56,10 @@
         type="email"
         name="email"
         id="email"
-        class="auth-form__input @error('email') auth-form__input--error @enderror"
+        @class([
+          'auth-form__input',
+          'auth-form__input--error' =>  $errors->has('email'),
+        ])
         value="{{ old('email') }}"
         autocomplete="email"
         maxlength="255"
@@ -75,7 +81,10 @@
         type="password"
         name="password"
         id="password"
-        class="auth-form__input @error('password') auth-form__input--error @enderror"
+        @class([
+          'auth-form__input',
+          'auth-form__input--error' => $errors->has('password'),
+        ])
         autocomplete="new-password"
         required
       >

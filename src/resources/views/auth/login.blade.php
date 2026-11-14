@@ -30,7 +30,10 @@
         type="email"
         name="email"
         id="email"
-        class="auth-form__input @error('email') auth-form__input--error @enderror"
+        @class([
+          'auth-form__input',
+          'auth-form__input--error' => $errors->has('email'),
+        ])
         value="{{ old('email') }}"
         autocomplete="email"
         required
@@ -51,7 +54,10 @@
         type="password"
         name="password"
         id="password"
-        class="auth-form__input@error('password') auth-form__input--error @enderror"
+        @class([
+        'auth-form__input',
+        'auth-form__input--error' => $errors->has('password'),
+        ])
         autocomplete="current-password"
         required
       >

@@ -7,6 +7,9 @@ use Tests\TestCase;
 
 class DatabaseConnectionTest extends TestCase
 {
+    /**
+     * テスト実行時にテスト専用のMySQLデータベースへ接続されていることを確認する
+     */
     public function test_database_connection_is__test_mysql(): void
     {
 
