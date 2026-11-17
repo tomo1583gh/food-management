@@ -8,8 +8,9 @@ RUN apt update \
       default-mysql-client \
       zlib1g-dev \
       libzip-dev \
+      libicu-dev \
       unzip \
-  && docker-php-ext-install pdo_mysql zip bcmath
+  && docker-php-ext-install pdo_mysql zip bcmath intl
 
 # -------- Composer --------
 RUN curl -sS https://getcomposer.org/installer | php \
