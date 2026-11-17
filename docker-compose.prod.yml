@@ -1,0 +1,32 @@
+services:
+  nginx:
+    image: nginx:1.21.1
+    ports:
+      - "127.0.0.1:8082:80"
+    volumes:
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./src:/var/www:ro
+    depends_on:
+      - php
+
+  php:
+    build:
+      context: ./docker/php
+      dockerfile: Dockerfile
+      args:
+        UID: "${UID:-1000}"
+        GID: "${GID:-1000}"
+    user: "${UID:-1000}:${GID:-1000}"
+    environment:
+      HOME: /var/www
+      COMPOSER_HOME: /tmp/.composer
+    volumes:
+      - ./src:/var/www
+    networks:
+      - default
+      - shared_mysql
+
+networks:
+  shared_mysql:
+    external: true
+    name: food_shared_mysql
