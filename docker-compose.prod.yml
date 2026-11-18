@@ -1,6 +1,7 @@
 services:
   nginx:
     image: nginx:1.21.1
+    restart: unless-stopped
     ports:
       - "127.0.0.1:8083:80"
     volumes:
@@ -16,6 +17,7 @@ services:
       args:
         UID: "${UID:-1000}"
         GID: "${GID:-1000}"
+    restart: unless-stopped
     user: "${UID:-1000}:${GID:-1000}"
     environment:
       HOME: /var/www
